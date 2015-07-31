@@ -1,0 +1,35 @@
+package com.logicmonitor.research.dcft.message;
+
+
+/**
+ * to compile:
+ *   protoc --java_out=src/main/java pbuf/dcft.proto
+ */
+option java_package = "com.logicmonitor.research.dcft.message";
+option java_outer_classname = "MW";
+
+
+message DcftHeartbeat {
+    required int32 cliId = 1;
+    required int64 membershipListVersion = 2;
+}
+
+
+message DcftMembershipList {
+    required int64 txnId = 1;
+    required int64 membershipListVersion = 2;
+    repeated int32 members = 3;
+}
+
+
+message DcftMembershipListResponse {
+    required int64 txnId = 1;
+    required int32 cliId = 2;
+    required int64 membershipListVersion = 3;
+}
+
+
+message DcftMessage {
+    optional DcftHeartbeat heartbeat = 1;
+    optional DcftMembershipListResponse membershipResponse = 2;
+}
